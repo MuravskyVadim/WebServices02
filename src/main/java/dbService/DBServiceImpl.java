@@ -13,7 +13,7 @@ public class DBServiceImpl implements DBService {
     private static Connection connection;
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost/mydb?useUnicode=true&" +
-        "useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            "useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String LOGIN = "root";
     private static final String PASSWORD = "12345";
 
@@ -40,7 +40,7 @@ public class DBServiceImpl implements DBService {
         }
     }
 
-    public long addUser(UserProfile userProfile) throws DBException {
+    public Long addUser(UserProfile userProfile) throws DBException {
         try {
             connection.setAutoCommit(false);
             UsersDAO dao = new UsersDAO(connection);
@@ -50,23 +50,23 @@ public class DBServiceImpl implements DBService {
         } catch (SQLException e) {
             try {
                 connection.rollback();
-            } catch (SQLException ignore) {
+            } catch (SQLException sql) {
+                sql.printStackTrace();
             }
             throw new DBException(e);
         } finally {
             try {
                 connection.setAutoCommit(true);
-            } catch (SQLException ignore) {
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
     }
 
     private static void getConnection() {
         try {
-            System.out.println("Start connection");
             Class.forName(DRIVER).newInstance();
             connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
-            System.out.println("Connection successful");
         } catch (InstantiationException | IllegalAccessException
                 | ClassNotFoundException | SQLException e) {
             System.out.println("SQL exception " + e.getMessage());

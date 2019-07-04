@@ -7,5 +7,5 @@ public interface DBService {
 
     void create() throws DBException;
 
-    long addUser(UserProfile userProfile) throws DBException;
+    Long addUser(UserProfile userProfile) throws DBException;
 }

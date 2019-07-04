@@ -15,7 +15,7 @@ public class UsersDAO {
     }
 
     public UsersDataSet get(String login) throws SQLException {
-        return executor.execQuery("select * from mydb.users where login='" + login + "'",
+        return executor.execQuery("SELECT * FROM mydb.users WHERE login='" + login + "'",
                 result -> {
                     result.next();
                     return new UsersDataSet(
@@ -26,7 +26,7 @@ public class UsersDAO {
     }
 
     public long getUserById(String login) throws SQLException {
-        return executor.execQuery("select id from mydb.users where login='" + login + "'",
+        return executor.execQuery("SELECT id FROM mydb.users WHERE login='" + login + "'",
                 result -> {
                     result.next();
                     return result.getLong(1);
@@ -34,7 +34,7 @@ public class UsersDAO {
     }
 
     public int getUsersCount() throws SQLException {
-        return executor.execQuery("select count(id) from mydb.users",
+        return executor.execQuery("SELECT COUNT(id) FROM mydb.users",
                 result -> {
                     result.next();
                     return result.getInt(1);
@@ -42,16 +42,16 @@ public class UsersDAO {
     }
 
     public void insertUser(UserProfile profile) throws SQLException {
-        executor.execUpdate("insert into mydb.users (login, password) values ('" +
+        executor.execUpdate("INSERT INTO mydb.users (login, password) VALUES ('" +
                 profile.getLogin() + "','" + profile.getPassword() + "')");
     }
 
     public void createTable() throws SQLException {
-        executor.execUpdate("create table if not exists mydb.users (id bigint auto_increment, " +
+        executor.execUpdate("CREATE table IF NOT EXISTS mydb.users (id bigint auto_increment, " +
                 "login varchar(256), password varchar(256), primary key (id))");
     }
 
     public void cleanup() throws SQLException {
-        executor.execUpdate("drop table mydb.users");
+        executor.execUpdate("DROP table mydb.users");
     }
 }
