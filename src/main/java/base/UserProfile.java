@@ -5,6 +5,10 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public class UserProfile {
-    @Getter private final String login;
-    @Getter private final String password;
+
+    @Getter
+    private final String login;
+
+    @Getter
+    private final String password;
 }

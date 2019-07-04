@@ -52,6 +52,6 @@ public class UsersDAO {
     }
 
     public void cleanup() throws SQLException {
-        executor.execUpdate("drop table medb.users");
+        executor.execUpdate("drop table mydb.users");
     }
 }
