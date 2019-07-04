@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UserProfile {
 
-    private final String login;
+    private String login;
 
-    private final String password;
+    private String password;
 }
